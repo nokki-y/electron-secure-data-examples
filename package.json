@@ -1,0 +1,24 @@
+{
+	"name": "electron-secure-data-examples",
+	"version": "1.0.0",
+	"license": "MIT",
+	"private": true,
+	"description": "Examples of secure and insecure data storage methods in Electron apps.",
+	"main": "main.js",
+	"scripts": {
+		"start": "electron ."
+	},
+	"dependencies": {
+		"bcrypt": "^5.1.0",
+		"dotenv": "^16.4.7",
+		"electron-store": "^8.1.0",
+		"keytar": "^7.7.0",
+		"nedb": "^1.8.0"
+	},
+	"engines": {
+		"node": ">=14.0.0"
+	},
+	"devDependencies": {
+		"electron": "^33.2.1"
+	}
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electron Secure Data Examples</title>
+    <style>
+        body {
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .example {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        .bad-example {
+            border-left: 4px solid #ff4444;
+        }
+        .good-example {
+            border-left: 4px solid #44ff44;
+        }
+        pre {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f0f0f0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Electron Secure Data Examples</h1>
+
+    <!-- Electron Store -->
+    <div class="section">
+        <h2>1. Electron Store</h2>
+        <div class="example bad-example">
+            <h3>Bad Example</h3>
+            <button onclick="runElectronStoreBadExample()">Run Bad Example</button>
+            <pre id="electron-store-bad-output"></pre>
+        </div>
+        <div class="example good-example">
+            <h3>Good Example</h3>
+            <button onclick="runElectronStoreGoodExample()">Run Good Example</button>
+            <pre id="electron-store-good-output"></pre>
+        </div>
+    </div>
+
+    <!-- Local File Storage -->
+    <div class="section">
+        <h2>2. Local File Storage</h2>
+        <div class="example bad-example">
+            <h3>Bad Example</h3>
+            <button onclick="runLocalFileBadExample()">Run Bad Example</button>
+            <pre id="local-file-bad-output"></pre>
+        </div>
+        <div class="example good-example">
+            <h3>Good Example</h3>
+            <button onclick="runLocalFileGoodExample()">Run Good Example</button>
+            <pre id="local-file-good-output"></pre>
+        </div>
+    </div>
+
+    <!-- SQLite/NeDB -->
+    <div class="section">
+        <h2>3. SQLite/NeDB</h2>
+        <div class="example bad-example">
+            <h3>Bad Example</h3>
+            <button onclick="runDatabaseBadExample()">Run Bad Example</button>
+            <pre id="database-bad-output"></pre>
+        </div>
+        <div class="example good-example">
+            <h3>Good Example</h3>
+            <button onclick="runDatabaseGoodExample()">Run Good Example</button>
+            <pre id="database-good-output"></pre>
+        </div>
+    </div>
+
+    <!-- OS Secure Storage -->
+    <div class="section">
+        <h2>4. OS Secure Storage</h2>
+        <div class="example good-example">
+            <h3>Good Example</h3>
+            <button onclick="runSecureStorageExample()">Run Example</button>
+            <pre id="secure-storage-output"></pre>
+        </div>
+    </div>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        function displayOutput(elementId, data) {
+            document.getElementById(elementId).textContent = 
+                typeof data === 'object' ? JSON.stringify(data, null, 2) : data;
+        }
+
+        // Electron Store Examples
+        function runElectronStoreBadExample() {
+            ipcRenderer.invoke('electron-store-bad').then(result => {
+                displayOutput('electron-store-bad-output', result);
+            });
+        }
+
+        function runElectronStoreGoodExample() {
+            ipcRenderer.invoke('electron-store-good').then(result => {
+                displayOutput('electron-store-good-output', result);
+            });
+        }
+
+        // Local File Examples
+        function runLocalFileBadExample() {
+            ipcRenderer.invoke('local-file-bad').then(result => {
+                displayOutput('local-file-bad-output', result);
+            });
+        }
+
+        function runLocalFileGoodExample() {
+            ipcRenderer.invoke('local-file-good').then(result => {
+                displayOutput('local-file-good-output', result);
+            });
+        }
+
+        // Database Examples
+        function runDatabaseBadExample() {
+            ipcRenderer.invoke('database-bad').then(result => {
+                displayOutput('database-bad-output', result);
+            });
+        }
+
+        function runDatabaseGoodExample() {
+            ipcRenderer.invoke('database-good').then(result => {
+                displayOutput('database-good-output', result);
+            });
+        }
+
+        // Secure Storage Example
+        function runSecureStorageExample() {
+            ipcRenderer.invoke('secure-storage').then(result => {
+                displayOutput('secure-storage-output', result);
+            });
+        }
+    </script>
+</body>
+</html>
